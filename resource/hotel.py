@@ -1,4 +1,5 @@
 from flask_restful import Resource, Api, reqparse
+from models.hotel import HotelModel
 
 hoteis= [ 
         {
@@ -24,7 +25,6 @@ hoteis= [
         }
 ]
  
-
 #primeiro recurso da api
 class Hoteis(Resource): 
     def get(self):
@@ -59,7 +59,10 @@ class Hotel(Resource):
         #chaves e valores dos argumentos passados, colhe os dados
         dados= Hotel.argumentos.parse_args()
         #desempacota todos os dados **dados, ele define a chave e o valor pra cada dado que tiver
-        novo_hotel= {'hotel_id' : hotel_id, **dados}
+        hotel_objeto= HotelModel(hotel_id, **dados)
+        #converte em um dicionário e transforma para JASON
+        novo_hotel= hotel_objeto.json()
+        #novo_hotel= {'hotel_id' : hotel_id, **dados}
         #comando para adiocionar um elemntos na lista 
         hoteis.append(novo_hotel)
         #retorna um novo hotel e apresenta um código de sucesso 
@@ -69,7 +72,10 @@ class Hotel(Resource):
         #chaves e valores dos argumentos passados, colhe os dados
         dados= Hotel.argumentos.parse_args()
         #desempacota todos os dados **dados, ele define a chave e o valor pra cada dado que tiver
-        novo_hotel= {'hotel_id' : hotel_id, **dados}
+        hotel_objeto= HotelModel(hotel_id, **dados)
+        #converte em um dicionário e transforma para JASON
+        novo_hotel= hotel_objeto.json()
+        #novo_hotel= {'hotel_id' : hotel_id, **dados}
         hotel= Hotel.find_hotel(hotel_id)
         if hotel:
             #função criada para atualizar o hotel caso ele exista, 200 sucesso

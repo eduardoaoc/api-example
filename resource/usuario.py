@@ -2,7 +2,7 @@ from flask_restful import Resource, Api, reqparse
 from pkg_resources import require
 from models.usuario import *
 #usados para verificação de senha e usuário
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token, jwt_required
 from werkzeug.security import safe_str_cmp
 
 #argumentos necessário para usuário fazer cadastro
@@ -18,7 +18,8 @@ class User(Resource):
         if user:
             return user.json()
         return {'Message': 'User not found.'}, 404        
-    
+
+    @jwt_required()
     def delete(self, user_id):
         user= UserModel.find_user(user_id)
         if user:

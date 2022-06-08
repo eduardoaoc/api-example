@@ -1,29 +1,6 @@
 from flask_restful import Resource, Api, reqparse
 from models.hotel import *
-
-hoteis= [ 
-        {
-            'hotel_id':'alpha', 
-            'nome':'alpha hotel' ,
-            'estrelas': 4.3,
-            'diaria': 420.52,
-            'cidade':'Santa Catarina'
-        },
-        {
-            'hotel_id':'beta', 
-            'nome':'beta hotel',
-            'estrelas': 4.0,
-            'diaria': 315.52,
-            'cidade':'Belo Horizonte'
-        },
-        {
-            'hotel_id':'gama', 
-            'nome':'gama hotel',
-            'estrelas': 4.7,
-            'diaria': 485.77,
-            'cidade':'Rio de Janeiro'
-        }
-]
+from flask_jwt_extended import *
  
 #primeiro recurso da api
 class Hoteis(Resource): 
@@ -42,14 +19,14 @@ class Hotel(Resource):
     argumentos.add_argument('estrelas', type=float, required= True, help="The field 'estrelas' cannot be left blank.")
     argumentos.add_argument('diaria')
     argumentos.add_argument('cidade')
-
+    # pesquisa tudo que tem dentro
     def get(self, hotel_id):
         hotel= HotelModel.find_hotel(hotel_id)
         if hotel:
             return hotel.json()
         return {'Message': 'Hotel not found.'}, 404        
     
-
+    #inserção de dados
     def post(self, hotel_id):
         if HotelModel.find_hotel(hotel_id):
             return {"message: " "Hotel id '{}'' already exists.".format(hotel_id)}, 404  #not found

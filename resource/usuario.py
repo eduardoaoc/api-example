@@ -1,8 +1,9 @@
-from flask_restful import Resource, Api, reqparse
-from pkg_resources import require
-from models.usuario import *
 #usados para verificação de senha e usuário
-from flask_jwt_extended import create_access_token, jwt_required
+from flask_jwt_extended import create_access_token, get_jwt, jwt_required, get_jwt 
+from flask_restful import Api, Resource, reqparse
+from blacklist import BLACKLIST
+from models.usuario import *
+from pkg_resources import require
 from werkzeug.security import safe_str_cmp
 
 #argumentos necessário para usuário fazer cadastro
@@ -57,3 +58,12 @@ class UserLogin(Resource):
             token_de_acesso= create_access_token(identity=user.user_id) 
             return {'access_token': token_de_acesso}, 200
         return {'Message': 'The username or password is incorrect.'}, 401 #Não autorizado
+
+
+class UserLogout(Resource):      
+    #quando a pessoa faz um post do loggout ele pega o id do token e adiocna na blacklist
+    @jwt_required()
+    def post(self):
+        jwt_id= get_jwt()['jti'] #JWT TOKEN IDENTIFIER
+        BLACKLIST.add(jwt_id)
+        return {'Mesage':'Logged out successfuly.'}, 200 

@@ -36,10 +36,6 @@ def token_de_acesso_invalidado(jwt_header, jwt_payload):
     return jsonify({'Message':'You have been logged out.'}), 401 
     #jsonify converte o dicionário para jason
 
-
-
-
-
 #adiciona o recurso e escolhe o endereço de onde quer ser chamado (link)
 api.add_resource(Hoteis, '/hoteis') 
 api.add_resource(Hotel, '/hoteis/<string:hotel_id>') 

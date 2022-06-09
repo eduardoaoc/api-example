@@ -1,6 +1,5 @@
 from sql_alchemy import banco
 
-
 class UserModel(banco.Model):
     #mapeamento para que essa classe seja entendida como uma tabela no banco de dados
     __tablename__= 'usuarios'

@@ -107,7 +107,7 @@ class Hotel(Resource):
     @jwt_required() #faz com que todas as operações que o usuário queira mudar e necessário estar logado
     def post(self, hotel_id):
         if HotelModel.find_hotel(hotel_id):
-            return {"message: " "Hotel id '{}'' already exists.".format(hotel_id)}, 404  #not found
+            return {"Message": "Hotel id '{}'' already exists.".format(hotel_id)}, 404  #not found
 
         #chaves e valores dos argumentos passados, colhe os dados
         dados= Hotel.argumentos.parse_args()
@@ -117,9 +117,9 @@ class Hotel(Resource):
             #salva o hotel no banco de dados e substitui
             hotel.save_hotel()
         except:
-            return {'message': 'An internal error ocurred trying to save.'}, 500 #internal server erro    
+            return {'Message': 'An internal error ocurred trying to save.'}, 500 #internal server erro    
         return hotel.json()       
-
+    #atualização de dados
     @jwt_required()
     def put(self, hotel_id):
         #chaves e valores dos argumentos passados, colhe os dados
@@ -138,7 +138,7 @@ class Hotel(Resource):
             #salva o hotel no banco de dados e substitui
             hotel.save_hotel()
         except:
-            return {'message': 'An internal error ocurred trying to save.'}, 500 #internal server erro      
+            return {'Message': 'An internal error ocurred trying to save.'}, 500 #internal server erro      
         return hotel.json(), 201   
 
     @jwt_required()

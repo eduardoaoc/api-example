@@ -1,4 +1,4 @@
-﻿**MODELO DE DOCUMENTAÇÃO DE REST APIs** 
+#DOCUMENTAÇÃO DE REST APIs
 
 Este documento explicita com exemplos, como utilizar os recursos disponíveis no REST API de Reserva e Comparação de Hotéis. Assim como, as formas de se realizar uma requisição e suas possíveis respostas.
 
@@ -424,5 +424,25 @@ Exemplos de Respostas, primeiro, a mensagem de sucesso ao deletar um usuário ex
 |200 OK||
 |404 Not <br>Found||
 |401 Unauthorized||
+
+# How run this project
+
+```bash
+# Clone this repository.
+git clone https://github.com/eduardoaoc/api-example-crud
+# Enter the folder.
+
+# Execute the file.
+app.py
+```
+
+
+# Author
+
+Eduardo A.
+
+ [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?&style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/eduardo-augusto-41436b233/) 
+ [![Github](https://img.shields.io/github/followers/eduardoaoc?style=social)](https://github.com/eduardoaoc)
+
 
 
